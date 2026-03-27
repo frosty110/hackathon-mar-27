@@ -5,16 +5,18 @@ import (
 
 	pricingv1 "github.com/blaisealbuquerque/pricing-radar/gen/pricing/v1"
 	"github.com/blaisealbuquerque/pricing-radar/internal/config"
+	"github.com/blaisealbuquerque/pricing-radar/internal/storage"
 )
 
 // PricingHandler implements pricingv1connect.PricingServiceHandler.
 // Phase 1: stub — returns empty responses. Scraper is wired in plan 01-04.
 type PricingHandler struct {
 	cfg *config.Config
+	db  *storage.GhostDB
 }
 
-func NewPricingHandler(cfg *config.Config) *PricingHandler {
-	return &PricingHandler{cfg: cfg}
+func NewPricingHandler(cfg *config.Config, db *storage.GhostDB) *PricingHandler {
+	return &PricingHandler{cfg: cfg, db: db}
 }
 
 func (h *PricingHandler) RunScan(

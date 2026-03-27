@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log/slog"
 	"net/http"
 	"os"
@@ -9,6 +10,7 @@ import (
 	pricingv1connect "github.com/blaisealbuquerque/pricing-radar/gen/pricing/v1/pricingv1connect"
 	"github.com/blaisealbuquerque/pricing-radar/internal/config"
 	"github.com/blaisealbuquerque/pricing-radar/internal/handler"
+	"github.com/blaisealbuquerque/pricing-radar/internal/storage"
 )
 
 func main() {
@@ -20,7 +22,18 @@ func main() {
 		os.Exit(1)
 	}
 
-	h := handler.NewPricingHandler(cfg)
+	db, err := storage.NewGhostDB(context.Background(), cfg.DatabaseURL)
+	if err != nil {
+		logger.Error("failed to connect to Ghost DB", "error", err)
+		os.Exit(1)
+	}
+	if err := db.AutoMigrate(context.Background()); err != nil {
+		logger.Error("AutoMigrate failed", "error", err)
+		os.Exit(1)
+	}
+	logger.Info("ghost db connected and migrated")
+
+	h := handler.NewPricingHandler(cfg, db)
 
 	mux := http.NewServeMux()
 	path, httpHandler := pricingv1connect.NewPricingServiceHandler(
