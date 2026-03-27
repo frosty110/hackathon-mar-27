@@ -4,6 +4,7 @@
 skills/
 skills-lock.json
 .augment/
+.archived/
 
 # Python
 __pycache__/
@@ -15,6 +16,12 @@ env/
 *.egg-info/
 dist/
 build/
+
+# Go generated code (do not commit)
+/gen/
+
+# Logs
+*.log
 
 # Environment
 .env
