@@ -12,7 +12,7 @@ Four phases from zero to demo-ready competitive pricing intelligence. Phase 1 la
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Project scaffolding, Ghost DB schema, httpx scraper verified against all target pages
+- [x] **Phase 1: Foundation** - Project scaffolding, Ghost DB schema, httpx scraper verified against all target pages (completed 2026-03-27)
 - [ ] **Phase 2: Extraction Pipeline** - LLM extraction and cross-model normalization with transparent assumptions
 - [ ] **Phase 3: Intelligence Layer** - Change detection and Aerospike vector similarity clustering
 - [ ] **Phase 4: Architect & Dashboard** - Pricing Architect RAG, Streamlit dashboard, demo hardening
@@ -34,7 +34,7 @@ Plans:
 - [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
 - [x] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
 - [x] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
-- [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
+- [x] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
 ### Phase 2: Extraction Pipeline
 **Goal**: A full scrape-to-store cycle works end-to-end for a single competitor, producing structured normalized pricing data with explicit assumption footnotes
@@ -49,7 +49,7 @@ Plans:
 Plans:
 - [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
 - [x] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
-- [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
+- [x] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
 ### Phase 3: Intelligence Layer
@@ -64,7 +64,7 @@ Plans:
 **Plans**: 4 plans
 Plans:
 - [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
-- [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
+- [x] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
 - [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
@@ -80,7 +80,7 @@ Plans:
   5. The demo change detection moment works reliably via the localhost mock fallback (seeded "before" and "after" pricing pages)
 **Plans**: 4 plans
 Plans:
-- [ ] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
+- [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
 - [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
 - [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 3/4 | In Progress|  |
+| 1. Foundation | 4/4 | Complete   | 2026-03-27 |
 | 2. Extraction Pipeline | 0/TBD | Not started | - |
 | 3. Intelligence Layer | 0/TBD | Not started | - |
 | 4. Architect & Dashboard | 0/TBD | Not started | - |
