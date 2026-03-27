@@ -29,7 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. All 5-8 target pricing pages return non-empty HTML via Go net/http; pages that fail fall back to cached local HTML and are flagged as "cached"
   4. Raw HTML is stripped of nav, footer, scripts, and CSS via goquery before any further processing
   5. Ghost DB schema supports scan_run_id, competitor key, and scraped_at timestamp so change detection queries will work
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
+- [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
+- [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
+- [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
 ### Phase 2: Extraction Pipeline
 **Goal**: A full scrape-to-store cycle works end-to-end for a single competitor, producing structured normalized pricing data with explicit assumption footnotes
@@ -40,7 +45,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. "Contact Sales" tiers are flagged as opaque with a confidence score rather than silently dropped
   3. All heterogeneous pricing models (per-seat, per-token, credits, hybrid) are normalized to a common monthly cost using an explicit reference workload
   4. Every normalized figure in the output carries its normalization_assumptions dict; pricing models that cannot be normalized display raw pricing with a flag
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
+- [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
+- [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
+- [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
 ### Phase 3: Intelligence Layer
 **Goal**: The system detects pricing changes between scans and clusters competitors by pricing similarity
@@ -51,7 +61,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. The first scan for a new competitor shows "baseline established" rather than false change alerts
   3. "Who prices like us?" query returns competitors ranked by pricing similarity using Aerospike HNSW vector search
   4. When a competitor changes pricing, its cluster position shifts are visible in the similarity rankings
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
+- [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
+- [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
+- [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
 ### Phase 4: Architect & Dashboard
 **Goal**: Judges can watch a 3-minute demo that shows a live scan, a detected pricing change, a strategy recommendation, and a dashboard with all visualizations
@@ -63,7 +78,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Dashboard reads exclusively from Ghost DB — no live LLM calls happen during page render
   4. The full scan-to-dashboard pipeline completes in under 60 seconds
   5. The demo change detection moment works reliably via the localhost mock fallback (seeded "before" and "after" pricing pages)
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
+- [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
+- [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
+- [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 **UI hint**: yes
 
 ## Progress
