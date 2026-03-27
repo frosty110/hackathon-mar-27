@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 4 plans
 Plans:
 - [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
-- [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
+- [x] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
 - [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
@@ -47,7 +47,7 @@ Plans:
   4. Every normalized figure in the output carries its normalization_assumptions dict; pricing models that cannot be normalized display raw pricing with a flag
 **Plans**: 4 plans
 Plans:
-- [ ] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
+- [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
 - [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
 - [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end

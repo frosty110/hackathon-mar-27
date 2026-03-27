@@ -9,7 +9,7 @@ Requirements for hackathon demo. Each maps to roadmap phases.
 
 ### Extraction
 
-- [ ] **EXTR-01**: Agent fetches 5-8 pre-selected AI company pricing pages concurrently via Go (net/http + goroutines)
+- [x] **EXTR-01**: Agent fetches 5-8 pre-selected AI company pricing pages concurrently via Go (net/http + goroutines)
 - [ ] **EXTR-02**: Raw HTML is pre-processed (strip nav, footer, scripts, CSS) via goquery before LLM extraction to reduce token cost
 - [ ] **EXTR-03**: LLM extracts structured pricing data (company, tiers, prices, features, limits, pricing model type) into typed Go structs
 - [ ] **EXTR-04**: Extraction handles "Contact Sales" tiers by flagging as opaque with confidence score
@@ -108,7 +108,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| EXTR-01 | Phase 1 | Pending |
+| EXTR-01 | Phase 1 | Complete |
 | EXTR-02 | Phase 1 | Pending |
 | EXTR-03 | Phase 2 | Pending |
 | EXTR-04 | Phase 2 | Pending |
