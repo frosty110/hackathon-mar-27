@@ -62,7 +62,7 @@ Requirements for hackathon demo. Each maps to roadmap phases.
 - [ ] **SPNS-01**: Ghost is used for all persistent data storage with autonomous DB creation
 - [ ] **SPNS-02**: TrueFoundry routes cheap model for extraction and expensive model for strategy
 - [ ] **SPNS-03**: Aerospike stores pricing embeddings for similarity search and strategy docs for RAG
-- [ ] **SPNS-04**: Macroscope is connected for code review during the build process
+- [x] **SPNS-04**: Macroscope is connected for code review during the build process
 
 ### Demo
 
@@ -140,7 +140,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SPNS-01 | Phase 1 | Pending |
 | SPNS-02 | Phase 2 | Pending |
 | SPNS-03 | Phase 3 | Pending |
-| SPNS-04 | Phase 1 | Pending |
+| SPNS-04 | Phase 1 | Complete |
 | DEMO-01 | Phase 4 | Pending |
 | DEMO-02 | Phase 4 | Pending |
 | DEMO-03 | Phase 4 | Pending |

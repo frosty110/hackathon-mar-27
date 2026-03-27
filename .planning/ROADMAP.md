@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. Ghost DB schema supports scan_run_id, competitor key, and scraped_at timestamp so change detection queries will work
 **Plans**: 4 plans
 Plans:
-- [ ] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
+- [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
 - [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
 - [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
