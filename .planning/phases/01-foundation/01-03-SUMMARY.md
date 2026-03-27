@@ -160,3 +160,12 @@ Each task was committed atomically:
 ---
 *Phase: 01-foundation*
 *Completed: 2026-03-27*
+
+## Self-Check: PASSED
+
+- FOUND: internal/storage/ghost.go
+- FOUND: cmd/server/main.go
+- FOUND: internal/handler/pricing.go
+- FOUND: .planning/phases/01-foundation/01-03-SUMMARY.md
+- FOUND commit b42e25c: feat(01-03): implement GhostDB storage client
+- Ghost DB tables verified: scan_runs, pricing_snapshots both confirmed via ghost_sql

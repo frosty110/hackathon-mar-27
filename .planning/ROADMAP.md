@@ -47,10 +47,10 @@ Plans:
   4. Every normalized figure in the output carries its normalization_assumptions dict; pricing models that cannot be normalized display raw pricing with a flag
 **Plans**: 4 plans
 Plans:
-- [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
-- [x] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
-- [x] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
-- [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
+- [ ] 02-01-PLAN.md — Shared data contracts: normalizer/models.go (Tier, RawPricingData types)
+- [ ] 02-02-PLAN.md — LLM extractor: TrueFoundry HTTP client, JSON mode, system prompt with few-shot examples
+- [ ] 02-03-PLAN.md — Normalizer reference workload logic + storage schema migration + SaveExtractedPricing
+- [ ] 02-04-PLAN.md — Proto extension + handler wiring: RunScan with full extract-normalize-store pipeline
 
 ### Phase 3: Intelligence Layer
 **Goal**: The system detects pricing changes between scans and clusters competitors by pricing similarity
@@ -61,12 +61,9 @@ Plans:
   2. The first scan for a new competitor shows "baseline established" rather than false change alerts
   3. "Who prices like us?" query returns competitors ranked by pricing similarity using Aerospike HNSW vector search
   4. When a competitor changes pricing, its cluster position shifts are visible in the similarity rankings
-**Plans**: 4 plans
+**Plans**: TBD plans
 Plans:
-- [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
-- [x] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
-- [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
-- [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
+- [ ] TBD
 
 ### Phase 4: Architect & Dashboard
 **Goal**: Judges can watch a 3-minute demo that shows a live scan, a detected pricing change, a strategy recommendation, and a dashboard with all visualizations
@@ -78,12 +75,9 @@ Plans:
   3. Dashboard reads exclusively from Ghost DB — no live LLM calls happen during page render
   4. The full scan-to-dashboard pipeline completes in under 60 seconds
   5. The demo change detection moment works reliably via the localhost mock fallback (seeded "before" and "after" pricing pages)
-**Plans**: 4 plans
+**Plans**: TBD plans
 Plans:
-- [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
-- [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
-- [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
-- [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
+- [ ] TBD
 **UI hint**: yes
 
 ## Progress
@@ -94,6 +88,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete   | 2026-03-27 |
-| 2. Extraction Pipeline | 0/TBD | Not started | - |
+| 2. Extraction Pipeline | 0/4 | Not started | - |
 | 3. Intelligence Layer | 0/TBD | Not started | - |
 | 4. Architect & Dashboard | 0/TBD | Not started | - |
