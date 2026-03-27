@@ -1,23 +1,27 @@
-# Stack Research
+<!-- GSD:project-start source:PROJECT.md -->
+## Project
 
-**Domain:** Competitive pricing intelligence agent (scraping + LLM extraction + vector search + dashboard)
-**Researched:** 2026-03-27
-**Confidence:** HIGH (architecture validated; Go + Connect-Go + Streamlit is a clean split)
+**Pricing Radar**
 
----
+An autonomous agent that scrapes competitor pricing pages, extracts structured data via LLM, normalizes across heterogeneous pricing models (per-seat, per-token, credits, etc.), detects changes, and generates strategy-grounded responses using internal positioning docs. Built as a hackathon project with a 3-minute live demo targeting judges evaluating autonomy, idea quality, technical implementation, tool use, and presentation.
+
+**Core Value:** Continuous competitive pricing intelligence that turns a 2-day manual spreadsheet into a 38-second automated scan with strategic recommendations.
+
+### Constraints
+
+- **Timeline**: 8 hours total build time (hackathon)
+- **Demo**: 3-minute live demo, must not break
+- **Sponsors**: Must use 3+ sponsor tools in load-bearing way (Ghost, TrueFoundry, Aerospike + Macroscope for code review)
+- **Tech stack**: Go backend (Connect-Go API, pgx, goquery) + Streamlit frontend (display only). Protobuf contract between them. No Playwright.
+- **Reliability**: Pre-selected pages + localhost mock fallback for demo stability
+<!-- GSD:project-end -->
+
+<!-- GSD:stack-start source:research/STACK.md -->
+## Technology Stack
 
 ## Architecture: Go Backend + Streamlit Frontend
-
-**Go** handles all business logic: scraping, LLM extraction, normalization, change detection, vector search, Postgres storage.
-**Streamlit** is a thin display layer that calls the Go API over HTTP/JSON.
-**Protobuf + Connect-Go** defines the contract between them.
-
----
-
 ## Recommended Stack
-
 ### Go Backend
-
 | Technology | Purpose | Why Recommended |
 |------------|---------|-----------------|
 | Go 1.22+ | Backend runtime | Goroutines for concurrent scraping, strong typing, single binary. User preference. |
@@ -31,107 +35,38 @@
 | aerospike-client-go (github.com/aerospike/aerospike-client-go/v7) | Aerospike K/V client | Official Go client for Aerospike K/V operations. For vector search, use the Aerospike AVS REST/gRPC API. |
 | slog | Structured logging | stdlib in Go 1.21+. Zero-dependency structured logging. |
 | godotenv (github.com/joho/godotenv) | Env var management | Load API keys from `.env` in development. Production reads env directly. |
-
 ### Protobuf Contract Layer
-
 | Technology | Purpose | Why Recommended |
 |------------|---------|-----------------|
 | Protocol Buffers v3 | API contract definition | Single source of truth for all request/response types between Go and Streamlit. |
 | buf CLI | Proto management | `buf lint`, `buf generate`, `buf breaking` — modern protobuf toolchain. |
 | Connect-Go plugin | Go server codegen | Generates typed Go handlers from `.proto` files. |
 | No Python protobuf deps needed | — | Connect-Go serves HTTP/JSON. Streamlit calls endpoints with `requests` and gets plain JSON back. |
-
 ### Streamlit Frontend (Python)
-
 | Technology | Version | Purpose | Why Recommended |
 |------------|---------|---------|-----------------|
 | Python 3.11+ | — | Streamlit runtime | Required by Streamlit. |
 | streamlit | 1.55.0 | Dashboard UI | Fast to build, built-in charting, sufficient for hackathon demo. |
 | requests | latest | HTTP client to call Go API | Simple, synchronous — fine for Streamlit's execution model. |
 | uv | latest | Dependency management | Fast installs for the thin Python layer. |
-
 ### Development Tools
-
 | Tool | Purpose | Notes |
 |------|---------|-------|
 | buf | Protobuf linting + codegen | `buf generate` produces Go server stubs. |
 | uv | Python dependency management | For the Streamlit frontend only. |
 | Macroscope | Code review during build | 4th sponsor tool. PR review workflow. |
 | air or gow | Go live reload (optional) | Hot-reload during development. Nice-to-have. |
-
----
-
 ## Installation
-
-```bash
 # Go backend setup
-mkdir -p pricing-radar/{cmd/server,internal,proto}
-cd pricing-radar
-go mod init pricing-radar
-
 # Core Go deps
-go get connectrpc.com/connect
-go get github.com/jackc/pgx/v5
-go get github.com/PuerkitoBio/goquery
-go get google.golang.org/protobuf
-go get golang.org/x/sync
-go get github.com/aerospike/aerospike-client-go/v7
-go get github.com/joho/godotenv
-
 # Install buf CLI (protobuf toolchain)
 # macOS:
-brew install bufbuild/buf/buf
-
 # Streamlit frontend setup
-cd frontend
-uv init
-uv add streamlit requests
-
 # Proto codegen
-buf generate
-
 # Run
-go run ./cmd/server &          # Go API on :8080
-cd frontend && uv run streamlit run app.py  # Streamlit on :8501
-```
-
----
-
 ## Protobuf Contract Pattern
-
-```protobuf
-// proto/pricing/v1/pricing.proto
-syntax = "proto3";
-package pricing.v1;
-
-service PricingService {
-  // Trigger a scan of all configured competitors
-  rpc RunScan(RunScanRequest) returns (RunScanResponse);
-  // Get the latest comparison table
-  rpc GetComparison(GetComparisonRequest) returns (GetComparisonResponse);
-  // Get detected changes between scans
-  rpc GetChanges(GetChangesRequest) returns (GetChangesResponse);
-  // Get strategic recommendation for a change
-  rpc GetRecommendation(GetRecommendationRequest) returns (GetRecommendationResponse);
-  // Get similarity clusters
-  rpc GetClusters(GetClustersRequest) returns (GetClustersResponse);
-}
-```
-
-Connect-Go serves this as both gRPC and HTTP/JSON on the same port. Streamlit calls the JSON endpoints:
-
-```python
 # frontend/app.py — calls Go API with plain requests
-import requests
-
-response = requests.post("http://localhost:8080/pricing.v1.PricingService/RunScan", json={})
-scan_result = response.json()
-```
-
----
-
 ## Alternatives Considered
-
 | Recommended | Alternative | When to Use Alternative |
 |-------------|-------------|-------------------------|
 | Connect-Go | gRPC + grpcio (Python) | If you need full protobuf typing on both sides. Adds grpcio dep to Python — overkill for a thin Streamlit layer. |
@@ -140,11 +75,7 @@ scan_result = response.json()
 | goquery | colly | If you need crawling (following links, pagination). goquery is lighter for targeted page parsing. |
 | pgx | database/sql + pq | If you want stdlib interface. pgx is faster and has better Postgres type support. |
 | net/http (raw REST) | openai-go SDK | The openai-go SDK works too, but TrueFoundry's API is plain REST — raw `net/http` has zero extra deps and keeps the LLM client explicit. |
-
----
-
 ## What NOT to Use
-
 | Avoid | Why | Use Instead |
 |-------|-----|-------------|
 | Playwright / Selenium | Explicit project constraint. Even harder to set up in Go. | net/http + goquery + LLM extraction |
@@ -153,108 +84,23 @@ scan_result = response.json()
 | gRPC on Python side | Adds protobuf compilation + grpcio deps to the thin Streamlit layer | Connect-Go serves JSON — call with requests |
 | ORM (GORM, sqlc) | Adds codegen/migration complexity for a small schema | pgx with raw SQL — schema is 3-4 tables |
 | gin / echo / fiber | Connect-Go already provides the HTTP server | Use Connect-Go's built-in net/http handler |
-
----
-
 ## Stack Patterns by Variant
-
-**For the extraction pipeline (scrape + LLM parse):**
 - Use goroutines + `errgroup` to fetch all pricing pages concurrently
 - Strip HTML with goquery (remove nav, footer, scripts) before sending to LLM
 - Call TrueFoundry cheap model (Haiku/Flash) via raw `net/http` POST to the OpenAI-compatible `/v1/chat/completions` endpoint
 - Decode the JSON response into Go structs (no pydantic, no instructor — plain `encoding/json`)
-
-**For the strategy analysis (Pricing Architect):**
 - Call TrueFoundry expensive model (Opus/GPT-4) via the same `net/http` pattern, just swap the model name string
 - Retrieve relevant strategy docs from Aerospike vector search before prompting
 - Pass normalized pricing comparison + retrieved docs as context
-
-**For the vector similarity ("who prices like us?"):**
 - Generate embeddings via TrueFoundry embedding model (same OpenAI-compatible API, `/v1/embeddings`)
 - Upsert into Aerospike AVS index with HNSW via the AVS REST/gRPC API
 - Query with current product's pricing profile to find nearest neighbors
-
-**For the Streamlit dashboard:**
 - Streamlit calls Go API endpoints with `requests`
 - Use `st.cache_data` to avoid re-calling the API on every widget interaction
 - All data comes from the Go API — Streamlit never touches Ghost DB or Aerospike directly
 - No business logic in Python: normalization, change detection, and clustering all live in Go
-
----
-
 ## TrueFoundry Integration Pattern (Go)
-
-```go
-// internal/extractor/llm.go
-package extractor
-
-import (
-    "bytes"
-    "context"
-    "encoding/json"
-    "fmt"
-    "net/http"
-    "os"
-)
-
-const (
-    ExtractionModel = "haiku-3-5"   // cheap — used for HTML → structured pricing
-    StrategyModel   = "claude-opus-4" // expensive — used for strategic recommendations
-)
-
-type chatRequest struct {
-    Model    string        `json:"model"`
-    Messages []chatMessage `json:"messages"`
-}
-
-type chatMessage struct {
-    Role    string `json:"role"`
-    Content string `json:"content"`
-}
-
-type chatResponse struct {
-    Choices []struct {
-        Message chatMessage `json:"message"`
-    } `json:"choices"`
-}
-
-func callLLM(ctx context.Context, model, prompt string) (string, error) {
-    payload := chatRequest{
-        Model:    model,
-        Messages: []chatMessage{{Role: "user", Content: prompt}},
-    }
-    body, _ := json.Marshal(payload)
-
-    req, err := http.NewRequestWithContext(ctx, http.MethodPost,
-        os.Getenv("TRUEFOUNDRY_GATEWAY_URL")+"/v1/chat/completions",
-        bytes.NewReader(body))
-    if err != nil {
-        return "", err
-    }
-    req.Header.Set("Authorization", "Bearer "+os.Getenv("TRUEFOUNDRY_API_KEY"))
-    req.Header.Set("Content-Type", "application/json")
-
-    resp, err := http.DefaultClient.Do(req)
-    if err != nil {
-        return "", err
-    }
-    defer resp.Body.Close()
-
-    var result chatResponse
-    if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-        return "", err
-    }
-    if len(result.Choices) == 0 {
-        return "", fmt.Errorf("empty LLM response")
-    }
-    return result.Choices[0].Message.Content, nil
-}
-```
-
----
-
 ## Sources
-
 - [Connect-Go docs](https://connectrpc.com/docs/go/getting-started/) — HTTP/JSON + gRPC on same port
 - [buf CLI](https://buf.build/docs/) — modern protobuf toolchain
 - [pgx v5 docs](https://github.com/jackc/pgx) — best Go Postgres driver
@@ -263,8 +109,38 @@ func callLLM(ctx context.Context, model, prompt string) (string, error) {
 - [golang.org/x/sync/errgroup](https://pkg.go.dev/golang.org/x/sync/errgroup) — structured goroutine concurrency
 - [TrueFoundry AI Gateway](https://www.truefoundry.com/ai-gateway) — OpenAI-compatible REST endpoint
 - PyPI / streamlit — version 1.55.0 verified March 2026
+<!-- GSD:stack-end -->
 
----
+<!-- GSD:conventions-start source:CONVENTIONS.md -->
+## Conventions
 
-*Stack research for: Pricing Radar — Go backend + Protobuf/Connect-Go + Streamlit frontend*
-*Researched: 2026-03-27 (updated from Python-only to Go+Streamlit split)*
+Conventions not yet established. Will populate as patterns emerge during development.
+<!-- GSD:conventions-end -->
+
+<!-- GSD:architecture-start source:ARCHITECTURE.md -->
+## Architecture
+
+Architecture not yet mapped. Follow existing patterns found in the codebase.
+<!-- GSD:architecture-end -->
+
+<!-- GSD:workflow-start source:GSD defaults -->
+## GSD Workflow Enforcement
+
+Before using Edit, Write, or other file-changing tools, start work through a GSD command so planning artifacts and execution context stay in sync.
+
+Use these entry points:
+- `/gsd:quick` for small fixes, doc updates, and ad-hoc tasks
+- `/gsd:debug` for investigation and bug fixing
+- `/gsd:execute-phase` for planned phase work
+
+Do not make direct repo edits outside a GSD workflow unless the user explicitly asks to bypass it.
+<!-- GSD:workflow-end -->
+
+
+
+<!-- GSD:profile-start -->
+## Developer Profile
+
+> Profile not yet configured. Run `/gsd:profile-user` to generate your developer profile.
+> This section is managed by `generate-claude-profile` -- do not edit manually.
+<!-- GSD:profile-end -->

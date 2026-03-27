@@ -59,7 +59,7 @@ Continuous competitive pricing intelligence that turns a 2-day manual spreadshee
 - **Timeline**: 8 hours total build time (hackathon)
 - **Demo**: 3-minute live demo, must not break
 - **Sponsors**: Must use 3+ sponsor tools in load-bearing way (Ghost, TrueFoundry, Aerospike + Macroscope for code review)
-- **Tech stack**: Python + Streamlit for dashboard, httpx for scraping (no Playwright)
+- **Tech stack**: Go backend (Connect-Go API, pgx, goquery) + Streamlit frontend (display only). Protobuf contract between them. No Playwright.
 - **Reliability**: Pre-selected pages + localhost mock fallback for demo stability
 
 ## Key Decisions
@@ -67,6 +67,7 @@ Continuous competitive pricing intelligence that turns a 2-day manual spreadshee
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Approach B: Ghost + Aerospike + TrueFoundry | Architecturally strongest sponsor story. TrueFoundry model routing is meaningful, not cosmetic | — Pending |
+| Go backend + Streamlit frontend | Go for all business logic (scraping, extraction, normalization, storage). Streamlit as thin display layer. Protobuf/Connect-Go contract between them. | — Pending |
 | httpx only, no Playwright | Build risk too high for headless browser in 8 hours | — Pending |
 | Pre-selected pages for demo | Eliminates external dependency risk during live demo | — Pending |
 | Macroscope as 4th sponsor (code review) | Fits naturally into dev workflow without forcing an unnatural integration | — Pending |

@@ -9,9 +9,9 @@ Requirements for hackathon demo. Each maps to roadmap phases.
 
 ### Extraction
 
-- [ ] **EXTR-01**: Agent fetches 5-8 pre-selected AI company pricing pages in parallel via httpx
-- [ ] **EXTR-02**: Raw HTML is pre-processed (strip nav, footer, scripts, CSS) before LLM extraction to reduce token cost
-- [ ] **EXTR-03**: LLM extracts structured pricing data (company, tiers, prices, features, limits, pricing model type) into pydantic schema
+- [ ] **EXTR-01**: Agent fetches 5-8 pre-selected AI company pricing pages concurrently via Go (net/http + goroutines)
+- [ ] **EXTR-02**: Raw HTML is pre-processed (strip nav, footer, scripts, CSS) via goquery before LLM extraction to reduce token cost
+- [ ] **EXTR-03**: LLM extracts structured pricing data (company, tiers, prices, features, limits, pricing model type) into typed Go structs
 - [ ] **EXTR-04**: Extraction handles "Contact Sales" tiers by flagging as opaque with confidence score
 - [ ] **EXTR-05**: Failed fetches fall back to cached HTML from local file and flag as "cached" in output
 
@@ -55,7 +55,7 @@ Requirements for hackathon demo. Each maps to roadmap phases.
 - [ ] **DASH-03**: Change alerts display with magnitude and direction when changes are detected
 - [ ] **DASH-04**: Market positioning cluster visual shows pricing similarity groupings
 - [ ] **DASH-05**: Pricing Architect recommendation panel displays strategic response text
-- [ ] **DASH-06**: Dashboard reads from Ghost DB (no live LLM calls during page render)
+- [ ] **DASH-06**: Dashboard reads exclusively from Go API (no direct DB access, no live LLM calls during page render)
 
 ### Sponsor Integration
 
@@ -95,7 +95,7 @@ Deferred to post-hackathon. Tracked but not in current roadmap.
 
 | Feature | Reason |
 |---------|--------|
-| Playwright/browser rendering | Build risk too high for 8-hour hackathon; httpx + pre-selected pages is reliable |
+| Playwright/browser rendering | Build risk too high for 8-hour hackathon; net/http + pre-selected pages is reliable |
 | User authentication | Single-user demo tool; auth doubles scope |
 | Real-time WebSocket updates | Polling sufficient; WebSocket adds infrastructure complexity |
 | Automated repricing | Requires product API integration; scope is 8x larger |
@@ -108,48 +108,48 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| EXTR-01 | — | Pending |
-| EXTR-02 | — | Pending |
-| EXTR-03 | — | Pending |
-| EXTR-04 | — | Pending |
-| EXTR-05 | — | Pending |
-| STOR-01 | — | Pending |
-| STOR-02 | — | Pending |
-| STOR-03 | — | Pending |
-| NORM-01 | — | Pending |
-| NORM-02 | — | Pending |
-| NORM-03 | — | Pending |
-| NORM-04 | — | Pending |
-| CHNG-01 | — | Pending |
-| CHNG-02 | — | Pending |
-| CHNG-03 | — | Pending |
-| CHNG-04 | — | Pending |
-| ARCH-01 | — | Pending |
-| ARCH-02 | — | Pending |
-| ARCH-03 | — | Pending |
-| ARCH-04 | — | Pending |
-| CLST-01 | — | Pending |
-| CLST-02 | — | Pending |
-| CLST-03 | — | Pending |
-| DASH-01 | — | Pending |
-| DASH-02 | — | Pending |
-| DASH-03 | — | Pending |
-| DASH-04 | — | Pending |
-| DASH-05 | — | Pending |
-| DASH-06 | — | Pending |
-| SPNS-01 | — | Pending |
-| SPNS-02 | — | Pending |
-| SPNS-03 | — | Pending |
-| SPNS-04 | — | Pending |
-| DEMO-01 | — | Pending |
-| DEMO-02 | — | Pending |
-| DEMO-03 | — | Pending |
+| EXTR-01 | Phase 1 | Pending |
+| EXTR-02 | Phase 1 | Pending |
+| EXTR-03 | Phase 2 | Pending |
+| EXTR-04 | Phase 2 | Pending |
+| EXTR-05 | Phase 1 | Pending |
+| STOR-01 | Phase 1 | Pending |
+| STOR-02 | Phase 1 | Pending |
+| STOR-03 | Phase 1 | Pending |
+| NORM-01 | Phase 2 | Pending |
+| NORM-02 | Phase 2 | Pending |
+| NORM-03 | Phase 2 | Pending |
+| NORM-04 | Phase 2 | Pending |
+| CHNG-01 | Phase 3 | Pending |
+| CHNG-02 | Phase 3 | Pending |
+| CHNG-03 | Phase 3 | Pending |
+| CHNG-04 | Phase 3 | Pending |
+| ARCH-01 | Phase 4 | Pending |
+| ARCH-02 | Phase 4 | Pending |
+| ARCH-03 | Phase 4 | Pending |
+| ARCH-04 | Phase 4 | Pending |
+| CLST-01 | Phase 3 | Pending |
+| CLST-02 | Phase 3 | Pending |
+| CLST-03 | Phase 3 | Pending |
+| DASH-01 | Phase 4 | Pending |
+| DASH-02 | Phase 4 | Pending |
+| DASH-03 | Phase 4 | Pending |
+| DASH-04 | Phase 4 | Pending |
+| DASH-05 | Phase 4 | Pending |
+| DASH-06 | Phase 4 | Pending |
+| SPNS-01 | Phase 1 | Pending |
+| SPNS-02 | Phase 2 | Pending |
+| SPNS-03 | Phase 3 | Pending |
+| SPNS-04 | Phase 1 | Pending |
+| DEMO-01 | Phase 4 | Pending |
+| DEMO-02 | Phase 4 | Pending |
+| DEMO-03 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 36 total
-- Mapped to phases: 0
-- Unmapped: 36 ⚠️
+- Mapped to phases: 36
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-03-27*
-*Last updated: 2026-03-27 after initial definition*
+*Last updated: 2026-03-27 after roadmap creation — all 36 requirements mapped*
