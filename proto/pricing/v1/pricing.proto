@@ -1,0 +1,44 @@
+syntax = "proto3";
+package pricing.v1;
+
+option go_package = "github.com/blaisealbuquerque/pricing-radar/gen/pricing/v1;pricingv1";
+
+// ── Phase 1: Scrape ──────────────────────────────────────────────────────────
+
+message RunScanRequest {}
+
+message RunScanResponse {
+  string scan_run_id = 1;
+  repeated CompetitorResult results = 2;
+}
+
+message CompetitorResult {
+  string competitor        = 1;
+  string raw_html_stripped = 2;
+  bool   from_cache        = 3;
+  string scraped_at        = 4;  // RFC3339
+}
+
+// ── Phase 2+: Placeholders (populated in later phases) ───────────────────────
+
+message GetComparisonRequest {}
+message GetComparisonResponse {}
+
+message GetChangesRequest {}
+message GetChangesResponse {}
+
+message GetRecommendationRequest {}
+message GetRecommendationResponse {}
+
+message GetClustersRequest {}
+message GetClustersResponse {}
+
+// ── Service ──────────────────────────────────────────────────────────────────
+
+service PricingService {
+  rpc RunScan(RunScanRequest) returns (RunScanResponse) {}
+  rpc GetComparison(GetComparisonRequest) returns (GetComparisonResponse) {}
+  rpc GetChanges(GetChangesRequest) returns (GetChangesResponse) {}
+  rpc GetRecommendation(GetRecommendationRequest) returns (GetRecommendationResponse) {}
+  rpc GetClusters(GetClustersRequest) returns (GetClustersResponse) {}
+}
