@@ -17,9 +17,9 @@ Requirements for hackathon demo. Each maps to roadmap phases.
 
 ### Storage
 
-- [ ] **STOR-01**: Ghost Postgres DB is created autonomously by the agent at startup
-- [ ] **STOR-02**: Each scan run inserts new rows with scan_run_id, competitor, and scraped_at timestamp
-- [ ] **STOR-03**: Historical scan data is queryable for change detection comparison
+- [x] **STOR-01**: Ghost Postgres DB is created autonomously by the agent at startup
+- [x] **STOR-02**: Each scan run inserts new rows with scan_run_id, competitor, and scraped_at timestamp
+- [x] **STOR-03**: Historical scan data is queryable for change detection comparison
 
 ### Normalization
 
@@ -59,7 +59,7 @@ Requirements for hackathon demo. Each maps to roadmap phases.
 
 ### Sponsor Integration
 
-- [ ] **SPNS-01**: Ghost is used for all persistent data storage with autonomous DB creation
+- [x] **SPNS-01**: Ghost is used for all persistent data storage with autonomous DB creation
 - [ ] **SPNS-02**: TrueFoundry routes cheap model for extraction and expensive model for strategy
 - [ ] **SPNS-03**: Aerospike stores pricing embeddings for similarity search and strategy docs for RAG
 - [x] **SPNS-04**: Macroscope is connected for code review during the build process
@@ -113,9 +113,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EXTR-03 | Phase 2 | Pending |
 | EXTR-04 | Phase 2 | Pending |
 | EXTR-05 | Phase 1 | Pending |
-| STOR-01 | Phase 1 | Pending |
-| STOR-02 | Phase 1 | Pending |
-| STOR-03 | Phase 1 | Pending |
+| STOR-01 | Phase 1 | Complete |
+| STOR-02 | Phase 1 | Complete |
+| STOR-03 | Phase 1 | Complete |
 | NORM-01 | Phase 2 | Pending |
 | NORM-02 | Phase 2 | Pending |
 | NORM-03 | Phase 2 | Pending |
@@ -137,7 +137,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DASH-04 | Phase 4 | Pending |
 | DASH-05 | Phase 4 | Pending |
 | DASH-06 | Phase 4 | Pending |
-| SPNS-01 | Phase 1 | Pending |
+| SPNS-01 | Phase 1 | Complete |
 | SPNS-02 | Phase 2 | Pending |
 | SPNS-03 | Phase 3 | Pending |
 | SPNS-04 | Phase 1 | Complete |

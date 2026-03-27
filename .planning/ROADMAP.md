@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
 - [x] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
-- [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
+- [x] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
 ### Phase 2: Extraction Pipeline
@@ -48,7 +48,7 @@ Plans:
 **Plans**: 4 plans
 Plans:
 - [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
-- [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
+- [x] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
 - [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
 
@@ -63,7 +63,7 @@ Plans:
   4. When a competitor changes pricing, its cluster position shifts are visible in the similarity rankings
 **Plans**: 4 plans
 Plans:
-- [ ] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
+- [x] 01-01-PLAN.md — Bootstrap: Go module, buf, GitHub repo, Macroscope GitHub App
 - [ ] 01-02-PLAN.md — Proto contract + Connect-Go server skeleton booting on :8080
 - [ ] 01-03-PLAN.md — Ghost DB provisioning, pgx storage layer with AutoMigrate
 - [ ] 01-04-PLAN.md — Concurrent scraper, goquery HTML stripping, RunScan end-to-end
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 3/4 | In Progress|  |
 | 2. Extraction Pipeline | 0/TBD | Not started | - |
 | 3. Intelligence Layer | 0/TBD | Not started | - |
 | 4. Architect & Dashboard | 0/TBD | Not started | - |
