@@ -27,3 +27,9 @@ buf generate
 # Run the server
 go run ./cmd/server
 ```
+
+## Architecture
+
+```
+proto/ → buf generate → gen/ (protobuf Go stubs) → internal/handler/ (Connect-Go handlers)
+```
